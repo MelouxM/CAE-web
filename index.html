@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validating Causal Abstraction Metrics on Simulated Complex Systems</title>
+    <link rel="icon" type="image/png" href="icon.png">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Validating Causal Abstraction Metrics on Simulated Complex Systems</h1>
+            <p class="subtitle">
+                 Maxime Méloux<sup>1</sup>, Tiago Pimentel<sup>2</sup>, François Portet<sup>1</sup>, Maxime Peyrard<sup>1</sup>
+                 <br/>
+            </p>
+            <span style="font-size: 0.8em;">
+                <sup>1</sup> Université Grenoble Alpes, CNRS, Grenoble INP, LIG, 38000 Grenoble, France<br/>
+                <sup>2</sup> ETH Zürich
+            </span>
+            <div class="row justify-content-center text-center">
+                <p>
+                    <a href="https://openreview.net/forum?id=hpyVULfQjb" class="d-inline-block p-3 align-top" target="_blank">
+                        <img height="100" src="assets/article-thumb.png" style="border:1px solid;" alt="Article thumbnail"><br>
+                        Article
+                    </a>
+                    <a href="https://link-to-preprint.com" class="d-inline-block p-3 align-top" target="_blank">
+                        <img height="100" src="assets/arxiv-thumb.jpg" style="border:1px solid;" alt="ArXiv Preprint thumbnail"><br>
+                        ArXiv<br>Pre-print
+                    </a>
+                    <a href="https://github.com/MelouxM/causal-abstraction-eval" class="d-inline-block p-3 align-top" target="_blank">
+                        <img height="100" src="assets/github-thumb.png" style="border:1px solid;" alt="GitHub Repo thumbnail"><br>
+                        GitHub<br>Repo
+                    </a>
+                    <a href="https://colab.research.google.com/github/melouxm/causal-abstraction-eval/blob/main/TODO.ipynb" class="d-inline-block p-3 align-bottom" target="_blank">
+                        <img height="78" src="assets/colab-thumb.png" style="border:1px solid;" alt="Demo Notebook thumbnail"><br>
+                        Demo Notebook
+                    </a>
+                </p>
+            </div>
+
+
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <section id="blog-content">
+                <!-- Blog content dynamically loaded from blog.md -->
+            </section>
+        </div>
+    </main>
+    <footer>
+        <div class="container">
+             <p>© 2026 <a href="https://melouxm.github.io/">Maxime Méloux</a>. Website icon by <a href="https://www.flaticon.com/authors/hilmy-abiyyu-a">Hilmy Abiyyu A.</a></p>
+        </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
+    <script>
+        // Load and convert blog markdown
+        fetch("blog/blog.md")
+            .then(response => response.text())
+            .then(markdown => {
+                const converter = new showdown.Converter({ tables: true });
+                document.getElementById("blog-content").innerHTML = converter.makeHtml(markdown);
+            });
+    </script>
+</body>
+</html>
