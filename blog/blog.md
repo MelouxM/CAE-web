@@ -32,16 +32,16 @@ The pairs themselves are varied, as can be seen from the table below.
 
 | System | Low-level simulation | High-level explanation | Explanation type | Type of aggregation |
 |--------|----------------------|------------------------|:----------------:|--------------------|
-| Gas                     | Lennard-Jones particles     | Ideal gas or Van der Waals law | Continuous → continuous | Global / aggregation |
-| Predator-prey (dynamic) | Agent-based model           | Lotka-Volterra ODE             | Discrete → continuous | Global / aggregation |
-| Heat equation 1D        | Brownian particles          | 1D heat equation               | Continuous → continuous | Spatial / binning    |
-| Heat equation 2D        | Phonon/lattice simulation   | 2D heat equation               | Continuous → continuous | Spatial / smoothing  |
-| Ising model             | Molecular dynamics/Monte-Carlo simulator    | Nearest-neighbor Ising model   | Continuous → continuous | Global / observables |
-| Tracr transformer       | Compiled transformer states | Symbolic sort-rank program     | Discrete → Discrete | Local / decoding     |
-| Gene regulatory network | Multi-valued GRN            | Binary Wg-Fz rule              | Discrete → Discrete | Local / threshold    |
-| Logic circuit           | Wire-level Boolean circuit  | Multi-bit gate circuit         | Discrete → Discrete | Local / functional   |
-| Transistor circuit      | SPICE/MOSFET voltages       | Boolean gate network           | Continuous → Discrete | Local / threshold    |
-| MOS 6502 CPU            | Transistor/segment state **or** logic-gate state | Logic-gate state **or** ISA registers and flags | Discrete → Discrete | Local / functional   |
+| Gas                     | [Lennard-Jones particles](https://en.wikipedia.org/wiki/Lennard-Jones_potential)     | [Ideal gas](https://en.wikipedia.org/wiki/Ideal_gas_law) or [Van der Waals law](https://en.wikipedia.org/wiki/Van_der_Waals_equation) | Continuous → continuous | Global / aggregation |
+| Predator-prey (dynamic) | [Agent-based model](https://en.wikipedia.org/wiki/Agent-based_model)           | [Lotka-Volterra](https://en.wikipedia.org/wiki/Lotka–Volterra_equations) ODE             | Discrete → continuous | Global / aggregation |
+| [Heat equation](https://en.wikipedia.org/wiki/Heat_equation) 1D        | Brownian particles          | 1D Heat equation               | Continuous → continuous | Spatial / binning    |
+| [Heat equation](https://en.wikipedia.org/wiki/Heat_equation) 2D        | Phonon/lattice simulation   | 2D heat equation               | Continuous → continuous | Spatial / smoothing  |
+| [Ising model](https://en.wikipedia.org/wiki/Ising_model)             | [Molecular dynamics](https://en.wikipedia.org/wiki/Molecular_dynamics)/Monte Carlo simulator    | Nearest-neighbor Ising model   | Continuous → continuous | Global / observables |
+| Tracr [transformer](https://en.wikipedia.org/wiki/Transformer_%28deep_learning_architecture%29)       | Compiled transformer states | Symbolic sort-rank program     | Discrete → Discrete | Local / decoding     |
+| [Gene regulatory network](https://en.wikipedia.org/wiki/Gene_regulatory_network) | Multi-valued GRN            | Binary [Wg](https://en.wikipedia.org/wiki/Wnt_signaling_pathway)-[Fz](https://en.wikipedia.org/wiki/Frizzled) rule              | Discrete → Discrete | Local / threshold    |
+| Logic circuit           | Wire-level [Boolean circuit](https://en.wikipedia.org/wiki/Boolean_circuit)  | Multi-bit [gate circuit](https://en.wikipedia.org/wiki/Logic_gate)         | Discrete → Discrete | Local / functional   |
+| Transistor circuit      | [SPICE](https://en.wikipedia.org/wiki/SPICE)/[MOSFET](https://en.wikipedia.org/wiki/MOSFET) voltages       | Boolean gate network         | Continuous → Discrete | Local / threshold    |
+| [MOS 6502 CPU](https://en.wikipedia.org/wiki/MOS_Technology_6502)            | Transistor/segment state **or** logic-gate state | Logic-gate state **or** [ISA](https://en.wikipedia.org/wiki/Instruction_set_architecture) registers and flags | Discrete → Discrete | Local / functional   |
 
 For every system, we supply:
 - The consensually accepted (correct) high-level model
