@@ -1,9 +1,9 @@
 ### Introduction
 
-In 2017 two neuroscientists, Eric Jonas and Konrad Kording, ran a [mischievous experiment](https://pmc.ncbi.nlm.nih.gov/articles/PMC5230747/). Rather than turning the standard toolkit of their field on a brain, they turned it on a MOS 6502, the microprocessor that once ran the original Nintendo Entertainement System (NES) and the Apple II. The contest was deliberately rigged in the scientist's favor: while brains are notoriously poorly understood and hard to study or measure, the 6502 chip can be observed completely, manipulated at will, and is small enough that its full wiring diagram has been known for decades.
-
-Yet, the familiar neuroscience methods (lesion studies, tuning curves, and connectivity analyses) recovered almost nothing of the processor's real organization. They produced findings that looked respectable: regions that responded during particular games, components that seemed to matter. However, none of it amounted to the high-level structure that engineers had deliberately implemented in the microprocessor. The instruments we trust to make sense of the brain could not make sense of a machine we had *already solved*.
-
+In 2017 two neuroscientists, Eric Jonas and Konrad Kording, ran a [mischievous experiment](https://pmc.ncbi.nlm.nih.gov/articles/PMC5230747/). Rather than turning the standard toolkit of their field on a brain, they turned it on a MOS 6502, the microprocessor that once ran the original Nintendo Entertainment System (NES) and the Apple II. The contest was deliberately rigged in the scientists' favor: while brains are notoriously poorly understood and hard to study or measure, the 6502 chip can be observed completely, manipulated at will, and is small enough that its full wiring diagram has been known for decades.
+ 
+Yet, the familiar neuroscience methods (lesion studies, tuning curves, and connectivity analyses) recovered almost nothing of the processor's real organization. They produced findings that looked respectable (regions that responded during particular games, components that seemed to matter), but none of it amounted to the high-level structure engineers had actually built. The instruments we trust to make sense of the brain could not make sense of a machine we had *already solved*.
+ 
 The result is unsettling, and exposes an issue that runs in the entirety of natural sciences. We are good at producing simple, localized explanations, but global ones are currently mostly out of reach. And although the literature offers an enormous catalogue of techniques for checking whether a high-level explanation of a complex system is correct, there is no consensus on which of them can be trusted. This is one of the main goals of our articles: we experimentally evaluate which of these techniques are trustworthy.
 
 ---
@@ -11,9 +11,9 @@ The result is unsettling, and exposes an issue that runs in the entirety of natu
 ### The problem: validation is hard
 
 The aim of science is more than mere description or prediction. What we want from it is **explanation**: an account of why a system behaves as it does. For anything complex, that account is almost always pitched at a high level. No one explains a gas by following 10^23 molecules through their collisions. Instead, the explanation is written in terms of high-level variables such as *temperature* and *pressure*. Similarly, no one explains an ecosystem one organism at a time, but we do so in terms of populations rising and falling against one another. Most crucially, in the field of AI explainability, we prefer to look for high-level circuits and features rather than explain a trained neural network neuron by neuron.
-
+ 
 In every case, the same wager is being made: that some coarse, simplified model captures what the underlying system is really doing. The problem is: what does "really doing" mean? There is no consensus on how to measure this.
-
+ 
 This is the gap our earlier work walked straight into. In [*Everything, Everywhere, All at Once*](https://melouxm.github.io/MI-identifiability-web/) we found that mechanistic explanations of even very small neural networks are badly non-unique, with dozens of thousands of incompatible circuits and algorithms all satisfying the field's usual checks even in extremely small networks. One reason we suspected was that the prevailing metrics are too forgiving, and reward explanations that *look* right without any guarantee that they are. This raises the obvious sequel: if today's criteria are too lenient, what would a demanding one look like, and how could anyone recognize it as the real thing?
 
 ---
@@ -53,7 +53,7 @@ The bar a good metric must clear is therefore double: it has to assign almost no
 
 ### A list of candidate metrics, and why most of them fail
 
-We gathered more than thirty candidate metrics of them from multiple fields of science, and arranged them into four families.
+We gathered more than thirty candidate metrics from multiple fields of science, and arranged them into four families.
 
 The **observational metrics** are the most intuitive ones. The reasoning is that a faithful explanation should reproduce the system's outputs. This family gathers metrics such as the mean squared error, the coefficient of determination, distributional distances such as the KL and Jensen-Shannon divergences, and trajectory-matching tools for systems that evolve in time. These quantities are cheap and usually easy to compute. However, these metrics cannot validate complex explanations, because they cannot distinguish between different mechanisms that lead to the same observable outcome. For example, a student may pass an exam because they understood the key concepts, but also because they memorized the class notes.
 
@@ -78,7 +78,7 @@ That is a firm endorsement of the causal abstraction program, the proposal that 
 
 ### Causal abstraction, briefly
 
-Picture two models stacked one above the other. One of them is the *low-level model*, M, which might be the gas of particles, or the transistor netlist, or the trained transformer. The other is the *high-level model*, E: the gas law, the network of logic gates, the symbolic program. They are joined by an *abstraction map* that describes how a low-level state translates into a high-level one: for instance, how a swarm of particles, condenses into a single quantity called *pressure*.
+Picture two models stacked one above the other. One of them is the *low-level model*, M, which might be the gas of particles, or the transistor netlist, or the trained transformer. The other is the *high-level model*, E: the gas law, the network of logic gates, the symbolic program. They are joined by an *abstraction map* that describes how a low-level state translates into a high-level one: for instance, how a swarm of particles condenses into a single quantity called *pressure*.
 
 <figure style="text-align: center;">
     <?xml version="1.0" encoding="UTF-8"?>
@@ -101,10 +101,10 @@ To this point, the picture matches the existing definitions of causal abstractio
 
 ### The missing ingredient: *faithfulness*
 
-However, real explanations are selective by their nature. To say that a particular circuit in a network computes the answer is to claim, beneath the surface, that the rest of the network does not. To say that temperature and pressure explain a gas is to claim that the identities of individual particles are beside the point. Mechanistic interpretability rests squarely on this kind of sparsity, the belief that a small subset of components carries the computation while everything else sits idle.
-
+However, real explanations are selective by their nature. To say that a particular circuit in a network computes the answer is to claim, beneath the surface, that the rest of the network does not. Mechanistic interpretability rests squarely on this kind of sparsity, the belief that a small subset of components carries the computation while everything else is idle.
+ 
 The trouble is that this inactivity is itself an empirical claim, and a strong one, which most metrics never examine. They accept the modeler's account of which variables matter and check consistency only on these. This can allow explanations to look sound even in the presence of causal leaks.
-
+ 
 *Faithfulness* testing solves this issue. The principle is to disturb the variables an explanation has dismissed as *irrelevant*, by injecting noise into them or perturbing them outright, and then to confirm that the high-level prediction is not accepted. If modifying a supposed irrelevant variable modifies the answer, then the explanation is wrong.
 
 <figure style="text-align: center;">
@@ -149,7 +149,7 @@ The answer turns out to be reassuring. On nearly every system in the benchmark, 
     <figcaption>The number of interventions needed to catch an invalid explanation tracks how rare the error is. A mistake that surfaces on only a fraction p of inputs costs roughly 1/p interventions to detect, regardless of network depth or width.</figcaption>
 </figure>
 
-What governs the budget is not the internal complexity of the system but the rarity of the explanation's error. An account that diverges from the truth on only 5% of inputs will be detected after roughly 20 interventions. As such, rare but systematic mistakes stay within reach, however deep or wide the underlying model happens to grow.
+What governs the budget is not the internal complexity of the system but the rarity of the explanation's error. An account that diverges from the truth on only 5% of inputs will be detected after roughly 20 interventions.
 
 ---
 
@@ -163,7 +163,7 @@ The second is that faithfulness cannot be treated as optional. The single design
 
 The third is that a metric of validity is also a target for discovery. Once a score truly rewards valid explanations, explanations can be sought by optimizing against it, whether by gradient, by symbolic search, by evolution, or with a human in the loop. CAE is meant to serve as exactly that objective.
 
-One point worth nothing is that the CAE judges whether a given explanation is valid. It does not, by itself, prevent a determined modeler from gerrymandering an abstraction map complex enough to work through. Validity is *necessary* for a good explanation without being *sufficient*. Parsimony, the choice of the right level, and the presence of real insight remain separate virtues that this consistency score does not evaluate. In addition, stochastic systems, where the two levels share a common source of noise, cannot currently entirely be handled by our work. These are important next questions to be treated as future work.
+One point worth noting is that the CAE judges whether a given explanation is valid. It does not, by itself, prevent a determined modeler from gerrymandering an abstraction map complex enough to work through. Validity is *necessary* for a good explanation without being *sufficient*. Parsimony, the choice of the right level, and the presence of real insight remain separate virtues that this consistency score does not evaluate. In addition, stochastic systems, where the two levels share a common source of noise, cannot currently entirely be handled by our work. These are important next questions to be treated as future work.
 
 The larger point, even so, is one we find hopeful. Fully observable and perfectly manipulable artificial systems make a strange and marvelous laboratory, a place to build and stress-test the science of explanation in the one setting where, for once, the answers are known in advance. The microprocessor defeated the neuroscience of 2017. Perhaps the right metric, sharpened first on the systems we understand, is what will keep that defeat from repeating itself on the systems we do not.
 
